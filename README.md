@@ -19,3 +19,11 @@ Simply run this command :
 
     ./run.sh runLlamaServer.sh
 
+Now that the server is running connect on the node with ssh and you can access the chat front http://localhost:8080
+
+## 4. Monitor your LLM
+
+The server is running, type this command to start the monitoring : 
+
+    python3 metrics.py
+
