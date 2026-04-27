@@ -1,29 +1,51 @@
 ## How to use this project ?
 
-### 1. Clone the repository
+### 1. Installation
 
-### 2. Setup Llama.cpp
+Clone the repository to your local directory on the cluster:
 
-To use Llama.cpp, you will need to compile it first. Use the .env.template file to make your own .env. Then you can launch "run.sh" with this command :
+    git clone https://github.com/gameking773/LLM_Monitoring.git
+    cd <project-directory>
 
-    ./run.sh setup/setupLlama.sh
+### 2. Configuration & Setup
+
+The project uses a .env file to manage private paths and Slurm settings without hardcoding them.
+
+Create your environment file:
+
+    cp .env.template .env
+
+Edit .env with your specific credentials.
 
 Then, wait for the file to compile (it can take up to 30 minute).
 
+Run the setup script. This will compile the engine for ARM/GPU (GH200) and download your model.
+
+    ./run.sh sbatch setup/setupLlama.sbatch
+
+*Compilation can take a long time and the job will automatically stops after 1h30, don't hesitate to increase it.*
+
 ## 3. Launch your server
 
-When you setup Llama, the model you picked in your .env will be downloaded. If you want to change it, simply download the new model and put it in the /models directory. Then change the infos in the .env and voilà.
+Once the setup is complete, your model is stored in the /models directory. If you want to change it, simply download the new model and put it there. Then change the infos in the .env and voilà.
 
-Now that you have a model, you can launch Llama-server. 
-Simply run this command :
+To start the Llama server:*
 
-    ./run.sh runLlamaServer.sh
+    ./run.sh sbatch runLlamaServer.sbatch
 
-Now that the server is running connect on the node with ssh and you can access the chat front http://localhost:8080
+The server will start on the allocated node. To access the web interface :
+
+- Identify the node name where the job is running with squeue --me
+
+- Create an SSH tunnel from your local machine: ssh -L 8080:node-01:8080 <user>@romeo.univ-reims.fr.
+
+- Open http://localhost:8080 in your browser.
 
 ## 4. Monitor your LLM
 
-The server is running, type this command to start the monitoring : 
+To track your server's performance (VRAM usage, tokens/sec, etc.), launch the monitoring dashboard. It automatically detects your active Slurm job:
 
     python3 metrics.py
 
+
+## What does the dashboard track ?
