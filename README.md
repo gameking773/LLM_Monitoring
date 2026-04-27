@@ -1,6 +1,6 @@
 ## How to use this project ?
 
-### 1. Installation
+### 1. Installation
 
 Clone the repository to your local directory on the cluster:
 
