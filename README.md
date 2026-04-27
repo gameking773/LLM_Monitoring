@@ -49,3 +49,11 @@ To track your server's performance (VRAM usage, tokens/sec, etc.), launch the mo
 
 
 ## What does the dashboard track ?
+
+# 1. Sources
+
+The dashboard uses multiple sources to track the server :
+
+For the GPU, it uses the nvidia-smi command.
+
+For Llama server, it uses the endpoints /metrics and /v1/models
