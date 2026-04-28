@@ -11,17 +11,22 @@ Clone the repository to your local directory on the cluster:
 
 The project uses a .env file to manage private paths and Slurm settings without hardcoding them.
 
-Create your environment file:
+Go into the cloned repo and create your environment file:
 
     cp .env.template .env
 
 Edit .env with your specific credentials.
 
+You need to make run.sh executable :
+
+    chmod +x ./run.sh
+
+
 Then, wait for the file to compile (it can take up to 30 minute).
 
 Run the setup script. This will compile the engine for ARM/GPU (GH200) and download your model.
 
-    ./run.sh sbatch setup/setupLlama.sbatch
+    ./run.sh sbatch setup/setupLlama.sh
 
 *Compilation can take a long time and the job will automatically stops after 1h30, don't hesitate to increase it.*
 
@@ -31,13 +36,13 @@ Once the setup is complete, your model is stored in the /models directory. If yo
 
 To start the Llama server:*
 
-    ./run.sh sbatch runLlamaServer.sbatch
+    ./run.sh sbatch runLlamaServer.sh
 
 The server will start on the allocated node. To access the web interface :
 
 - Identify the node name where the job is running with squeue --me
 
-- Create an SSH tunnel from your local machine: ssh -L 8080:node-01:8080 <user>@romeo.univ-reims.fr.
+- Create an SSH tunnel from your local machine: ssh -L 8080:node-01:8080 <login>@romeo1.univ-reims.fr.
 
 - Open http://localhost:8080 in your browser.
 
@@ -50,7 +55,7 @@ To track your server's performance (VRAM usage, tokens/sec, etc.), launch the mo
 
 ## What does the dashboard track ?
 
-# 1. Sources
+### 1. Sources
 
 The dashboard uses multiple sources to track the server :
 
