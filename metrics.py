@@ -152,6 +152,7 @@ def monitor():
 
                 print(f"\n Usage")
                 print(f"  GPU Kernel Usage     : {gpuMetrics['utilization.gpu']}%")
+                print(f"  Memory Usage         : {gpuMetrics['utilization.memory']}%")
                 print(f"  VRAM Usage           : {gpuMetrics['memory.used']} MB / {gpuMetrics['memory.total']} MB")
 
                 print(f"\n Clocks")
