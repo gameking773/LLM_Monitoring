@@ -62,3 +62,19 @@ The dashboard uses multiple sources to track the server :
 For the GPU, it uses the nvidia-smi command.
 
 For Llama server, it uses the endpoints /metrics and /v1/models
+
+### 2. GPU Datas
+
+Name : Model of the GPU
+
+**GPU Temperature** : Temperature of the core of the GPU
+**Memory Temperature** : Temperature of the memory chips
+**GPU Thermal Slowdown** : Indicates if the GPU is currently reducing its speed due to overheating. 
+**Consumption** : Current power consumption in Watts / The maximum power cap allowed before the GPU starts throttling.
+
+**GPU Kernel Usage** : Percentage of time one or more GPU kernels were active over the last sample period.
+**Memory Usage** : Percentage of time the memory controller was busy
+**VRAM Usage** : Amount of  memory currently occupied / Total VRAM capacity of the GPU
+
+**Graphical clock** : Current frequency of the graphics cores (MHz).
+**Memory clock** : Current frequency of the VRAM
