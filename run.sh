@@ -10,4 +10,8 @@ else
     exit 1
 fi
 
-exec "$@"
+if [ "$1" == "sbatch" ]; then
+    envsubst < "$2" | sbatch
+else
+    exec "$@"
+fi
