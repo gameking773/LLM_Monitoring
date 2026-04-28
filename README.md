@@ -1,3 +1,17 @@
+## Context and requirements
+
+This project is designed for researchers, students, and engineers working on LLMs who want an automated way to deploy inference servers on High-Performance Computing clusters without dealing with complex manual configurations.
+
+### Requirements
+
+The scripts and configurations are specifically optimized for the ROMEO Supercomputer environment.
+
+Before starting, ensure you have :
+
+- An active account on the ROMEO cluster
+- SSH access to the login node
+- A basic understanding of Slurm commands
+
 ## How to use this project ?
 
 ### 1. Installation
