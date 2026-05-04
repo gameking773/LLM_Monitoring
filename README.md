@@ -1,3 +1,18 @@
+# LLM Monitoring for Romeo Supercalculator
+
+## Sommaire
+- [Context and requirements](#context-and-requirements)
+- [How to use this project ?](#how-to-use-this-project-)
+  - [1. Installation and .env](#1-installation-and-env)
+  - [2. Setup & Server](#2-setup--server)
+  - [3. Monitor your LLM](#3-monitor-your-llm)
+- [What does the dashboard track ?](#what-does-the-dashboard-track-)
+  - [1. Sources](#1-sources)
+  - [2. GPU Data](#2-gpu-data)
+  - [3. Llama.cpp Data](#3-llamacpp-data)
+- [Credits](#credits)
+
+
 ## Context and requirements
 
 This project is designed for researchers, students, and engineers working on LLMs who want an automated way to deploy inference servers on High-Performance Computing clusters without dealing with complex manual configurations.
