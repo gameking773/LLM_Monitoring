@@ -128,3 +128,7 @@ For Llama server, it uses the endpoints /metrics and /v1/models.
 **Number of Decode** : Cumulative count of decoding cycles performed.   
 **Max Tokens Observed** : Maximum context window size.   
 **Busy Slots Average** : Number of active slots during the last decode cycle.   
+
+## Credits
+
+This work was performed with the assistance of the ROMEO Regional Computing Center
