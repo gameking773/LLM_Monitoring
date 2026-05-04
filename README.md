@@ -5,6 +5,8 @@
 - [How to use this project ?](#how-to-use-this-project-)
   - [1. Installation and .env](#1-installation-and-env)
   - [2. Setup & Server](#2-setup--server)
+    - [Llama.cpp](#llamacpp)
+    - [vLLM](#vllm)
   - [3. Monitor your LLM](#3-monitor-your-llm)
 - [What does the dashboard track ?](#what-does-the-dashboard-track-)
   - [1. Sources](#1-sources)
