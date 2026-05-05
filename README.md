@@ -83,7 +83,11 @@ The server will start on the allocated node. To access the web interface :
 
 ##### Setup 
 
-The setup script isn't ready for the moment, let me know if you manage to make one.
+Run the setup script. This will compile the engine for ARM/GPU (GH200) and download your model.
+
+    ./run.sh sbatch setup/setupvLLM.sh
+
+*Compilation can take a really really long time and the job will automatically stops after 4h00, if you hit a time limit, try to optimize my code.*
 
 ##### Server 
 
