@@ -53,5 +53,5 @@ pip install vllm \
 
 # HuggingFace + Model installation
 pip install huggingface_hub
-hf download unsloth/Qwen3-8B \
---local-dir ${PROJECT_DIR}/models/Qwen3-8B 
+hf download ${MODEL_REPO} \
+--local-dir ${PROJECT_DIR}/models/${MODEL_FILE}
