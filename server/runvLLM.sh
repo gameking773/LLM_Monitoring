@@ -40,6 +40,7 @@ export MULTIPROCESSING_TMPDIR="${PROJECT_DIR}/vllm_cache/tmp"
     PYTHONPATH=$PYTHONPATH \
     python -m vllm.entrypoints.openai.api_server \
         --model ${PROJECT_DIR}/models/${MODEL_FILE} \
+        --served-model-name ${MODEL_FILE} \
         --host 0.0.0.0 \
         --port 8080 \
         --dtype float16 \
