@@ -17,7 +17,6 @@ spack load cuda@12.6.3
 source ${PROJECT_DIR}/vllm_env/bin/activate
 
 # Downloading gradio to get a web chat
-pip install gradio openai
 pip install python-dotenv
 
 # Cache redirection
@@ -47,4 +46,4 @@ export MULTIPROCESSING_TMPDIR="${PROJECT_DIR}/vllm_cache/tmp"
         --enforce-eager \
         --gpu-memory-utilization 0.7 \
         --enable-auto-tool-choice \
-        --tool-call-parser hermes
+        --tool-call-parser auto

@@ -43,9 +43,3 @@ cmake --build build --config Release -j8
 # Verification
 echo "Version installée"
 ./build/bin/llama-cli --version
-
-# Model downloading
-pip install huggingface_hub
-hf download ${MODEL_REPO} \
-  --include "${MODEL_FILE}" \
-  --local-dir ${PROJECT_DIR}/models
