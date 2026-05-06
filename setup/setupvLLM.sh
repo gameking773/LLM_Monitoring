@@ -50,8 +50,3 @@ pip install numpy
 pip install vllm \
  --extra-index-url https://download.pytorch.org/whl/cu126 \
  --no-cache-dir
-
-# HuggingFace + Model installation
-pip install huggingface_hub
-hf download ${MODEL_REPO} \
---local-dir ${LLM_DIR}/models/${MODEL_FILE}
