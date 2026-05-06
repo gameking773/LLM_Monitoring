@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #SBATCH --account=${SBATCH_ACCOUNT}
 #SBATCH --job-name=${SBATCH_JOB_NAME}
-#SBATCH --output=${PROJECT_DIR}/setup_venv-%j.out
+#SBATCH --output=${LLM_DIR}/setup_venv-%j.out
 #SBATCH --gres=gpu:1
 #SBATCH --cpus-per-task=8
 #SBATCH --mem=32G
@@ -17,10 +17,10 @@ export LD_LIBRARY_PATH=$(spack location -i cuda@13.0.2)/lib64:$LD_LIBRARY_PATH
 echo "Starting server on node : $HOSTNAME"
 
 # Run model
-cd ${PROJECT_DIR}/llama.cpp
+cd ${LLM_DIR}/llama.cpp
 #!/bin/bash
 ./build/bin/llama-server \
-  --model ${PROJECT_DIR}/models/${MODEL_FILE} \
+  --model ${LLM_DIR}/models/${MODEL_FILE} \
   --host 0.0.0.0 \
   --port 8080 \
   --metrics

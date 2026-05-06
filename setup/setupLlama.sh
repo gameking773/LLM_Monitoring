@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #SBATCH --account=${SBATCH_ACCOUNT}
 #SBATCH --job-name=${SBATCH_JOB_NAME}
-#SBATCH --output=${PROJECT_DIR}/setup_venv-%j.out
+#SBATCH --output=${LLM_DIR}/setup_venv-%j.out
 #SBATCH --gres=gpu:1
 #SBATCH --cpus-per-task=8
 #SBATCH --mem=32G
@@ -20,7 +20,7 @@ nvcc --version || echo "nvcc absent"
 nvidia-smi | head -5
 
 # Pull llama.cpp from github if it isn't here. Else reuse it
-cd ${PROJECT_DIR}
+cd ${LLM_DIR}
 
 if [ ! -d "llama.cpp" ]; then
     git clone https://github.com/ggml-org/llama.cpp

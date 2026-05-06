@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #SBATCH --account=${SBATCH_ACCOUNT}
 #SBATCH --job-name=${SBATCH_JOB_NAME}
-#SBATCH --output=${PROJECT_DIR}/logs/models/model_download-%j.out
+#SBATCH --output=${LLM_DIR}/logs/models/model_download-%j.out
 #SBATCH --gres=gpu:1
 #SBATCH --cpus-per-task=8
 #SBATCH --mem=32G
