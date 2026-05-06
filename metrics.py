@@ -54,7 +54,13 @@ def getMetricsGpu():
     ]
     try :
         result = subprocess.check_output(command, stderr=subprocess.STDOUT, timeout=5).decode('utf-8').strip()
-        return dict(zip(gpuParams, [r.strip() for r in result.split(',')]))
+        gpu_lines = result.split('\n')
+        
+        all_gpus = []
+        for line in gpu_lines:
+            metrics = dict(zip(gpuParams, [r.strip() for r in line.split(',')]))
+            all_gpus.append(metrics)
+        return all_gpus
     except Exception as e:
         print(f"Error : {e}")
         return None
@@ -141,23 +147,25 @@ def monitor():
             print(f"Started at {timestamps[0]} | Launched at {timestamps[1]}")
 
             if gpuMetrics is not None:
-                # Display metrics
-                print(f"\n GPU : {gpuMetrics['name']}")
+                # Display metrics for each gpu
+                for i, gpu in enumerate(gpuMetrics):
+                    print(f"\n GPU {i} : {gpu['name']}")
 
-                print(f"\n Temperature and energy consumption")
-                print(f"  GPU Temperature      : {gpuMetrics['temperature.gpu']}°C")
-                print(f"  Memory Temperature   : {gpuMetrics['temperature.memory']}°C")
-                print(f"  GPU Thermal Slowdown : {gpuMetrics['clocks_event_reasons.hw_thermal_slowdown']}")
-                print(f"  Consumption          : {gpuMetrics['power.draw']}W / {gpuMetrics['power.limit']}W")
+                    print(f"\n Temperature and energy consumption (GPU {i})")
+                    print(f"  GPU Temperature      : {gpu['temperature.gpu']}°C")
+                    print(f"  Memory Temperature   : {gpu['temperature.memory']}°C")
+                    print(f"  GPU Thermal Slowdown : {gpu['clocks_event_reasons.hw_thermal_slowdown']}")
+                    print(f"  Consumption          : {gpu['power.draw']}W / {gpu['power.limit']}W")
 
-                print(f"\n Usage")
-                print(f"  GPU Kernel Usage     : {gpuMetrics['utilization.gpu']}%")
-                print(f"  Memory Usage         : {gpuMetrics['utilization.memory']}%")
-                print(f"  VRAM Usage           : {gpuMetrics['memory.used']} MB / {gpuMetrics['memory.total']} MB")
+                    print(f"\n Usage (GPU {i})")
+                    print(f"  GPU Kernel Usage     : {gpu['utilization.gpu']}%")
+                    print(f"  Memory Usage         : {gpu['utilization.memory']}%")
+                    print(f"  VRAM Usage           : {gpu['memory.used']} MB / {gpu['memory.total']} MB")
 
-                print(f"\n Clocks")
-                print(f"  Graphical clock      : {gpuMetrics['clocks.current.graphics']} MHz / {gpuMetrics['clocks.current.sm']} MHz")
-                print(f"  Memory clock         : {gpuMetrics['clocks.current.memory']} MHz")
+                    print(f"\n Clocks (GPU {i})")
+                    print(f"  Graphical clock      : {gpu['clocks.current.graphics']} MHz / {gpu['clocks.current.sm']} MHz")
+                    print(f"  Memory clock         : {gpu['clocks.current.memory']} MHz")
+                    print("-" * 30)
                 
             
             else : 
