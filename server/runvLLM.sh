@@ -14,7 +14,7 @@ spack load python@3.13.0/rom
 spack load cuda@12.6.3
 
 # Activating vLLM env from its venv path 
-source ${VENV_PATH}/bin/activate
+source ${PROJECT_DIR}/vllm_env/bin/activate
 
 # Downloading gradio to get a web chat
 pip install gradio openai
@@ -46,4 +46,5 @@ export MULTIPROCESSING_TMPDIR="${PROJECT_DIR}/vllm_cache/tmp"
         --dtype float16 \
         --enforce-eager \
         --gpu-memory-utilization 0.7 \
-        --max-model-len 2048 
+        --enable-auto-tool-choice \
+        --tool-call-parser hermes
