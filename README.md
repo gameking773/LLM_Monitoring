@@ -81,7 +81,7 @@ The server will start on the allocated node. To access the web interface :
 
 - Identify the node name where the job is running with squeue --me
 
-- Create an SSH tunnel from your local machine to the node: ssh -L 8080:<node>:8080 <login>@romeo1.univ-reims.fr.
+- Create an SSH tunnel from your local machine to the node: ssh -L 8080:[node]:8080 [login]@romeo1.univ-reims.fr.
 
 - Open http://localhost:8080 in your browser.
 
@@ -93,7 +93,7 @@ Run the setup script. This will compile the engine for ARM/GPU and download your
 
     ./run.sh sbatch setup/setupvLLM.sh
 
-*Compilation can take a really really long time and the job will automatically stops after 4h00, if you hit a time limit, try to optimize my code.*
+*Note : Compilation can take a really really long time and the job will automatically stops after 4h00, if you hit a time limit, try to optimize my code.*
 
 
 ##### Server 
