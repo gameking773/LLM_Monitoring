@@ -4,10 +4,11 @@
 - [Context and requirements](#context-and-requirements)
 - [How to use this project ?](#how-to-use-this-project-)
   - [1. Installation and .env](#1-installation-and-env)
-  - [2. Setup & Server](#2-setup--server)
+  - [2. Models](#2-models)
+  - [3. Setup & Server](#3-setup--server)
     - [Llama.cpp](#llamacpp)
     - [vLLM](#vllm)
-  - [3. Monitor your LLM](#3-monitor-your-llm)
+  - [4. Monitor your LLM](#4-monitor-your-llm)
 - [What does the dashboard track ?](#what-does-the-dashboard-track-)
   - [1. Sources](#1-sources)
   - [2. GPU Data](#2-gpu-datas)
@@ -106,7 +107,7 @@ To start the Llama server:
 On vLLM, there isn't any chat box, i advise you to use Opencode 
 
 
-### 3. Monitor your LLM
+### 4. Monitor your LLM
 
 To track your server's performance (VRAM usage, tokens/sec, etc.), launch the monitoring dashboard. It automatically detects your active Slurm job:
 
