@@ -50,8 +50,15 @@ You need to make run.sh executable :
 
     chmod +x ./run.sh
 
+### 2. Models
 
-### 2. Setup & Server
+Enter the infos for your model in the .env file. Then run this command : 
+
+    ./run.sh sbatch model_download
+
+*Note : Llama.cpp only accepts .gguf model*
+
+### 3. Setup & Server
 
 #### Llama.cpp
 
@@ -61,11 +68,9 @@ Run the setup script. This will compile the engine for ARM/GPU (GH200) and downl
 
     ./run.sh sbatch setup/setupLlama.sh
 
-*Compilation can take a long time and the job will automatically stops after 1h30, don't hesitate to increase it.*
+*Note : Compilation can take a long time and the job will automatically stops after 1h30, don't hesitate to increase it.*
 
 ##### Server
-
-Once the setup is complete, your model is stored in the /models directory. If you want to change it, simply download the new model and put it there. Then change the infos in the .env and voilà.
 
 To start the Llama server:
 
@@ -75,7 +80,7 @@ The server will start on the allocated node. To access the web interface :
 
 - Identify the node name where the job is running with squeue --me
 
-- Create an SSH tunnel from your local machine: ssh -L 8080:node-01:8080 <login>@romeo1.univ-reims.fr.
+- Create an SSH tunnel from your local machine to the node: ssh -L 8080:<node>:8080 <login>@romeo1.univ-reims.fr.
 
 - Open http://localhost:8080 in your browser.
 
@@ -83,15 +88,14 @@ The server will start on the allocated node. To access the web interface :
 
 ##### Setup 
 
-Run the setup script. This will compile the engine for ARM/GPU (GH200) and download your model.
+Run the setup script. This will compile the engine for ARM/GPU and download your model.
 
     ./run.sh sbatch setup/setupvLLM.sh
 
 *Compilation can take a really really long time and the job will automatically stops after 4h00, if you hit a time limit, try to optimize my code.*
 
-##### Server 
 
-Once the setup is complete, your model is stored in the /models directory. If you want to change it, simply download the new model and put it there. Then change the infos in the .env and voilà.
+##### Server 
 
 You need to put your venv path in the .env file in order to start vLLM.
 
@@ -99,7 +103,7 @@ To start the Llama server:
 
     ./run.sh sbatch server/runvLLM.sh
 
-On vLLM, there isn't any chat box, i advise you to use opencode 
+On vLLM, there isn't any chat box, i advise you to use Opencode 
 
 
 ### 3. Monitor your LLM
