@@ -46,4 +46,4 @@ export MULTIPROCESSING_TMPDIR="${LLM_DIR}/vllm_cache/tmp"
         --enforce-eager \
         --gpu-memory-utilization 0.7 \
         --enable-auto-tool-choice \
-        --tool-call-parser auto
+        --tool-call-parser ${VLLM_TOOL_CALL_PARSER}
