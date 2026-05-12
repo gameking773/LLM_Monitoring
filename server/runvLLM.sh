@@ -30,6 +30,9 @@ export VLLM_CONFIG_ROOT="${LLM_DIR}/vllm_cache/config"
 export MULTIPROCESSING_TMPDIR="${LLM_DIR}/vllm_cache/tmp"
 
 
+# API Launch
+${LLM_DIR}/monitor_env/bin/python ${LLM_DIR}/metrics_api.py &
+
 # Server launch
 /usr/bin/env \
     TMPDIR="${LLM_DIR}/vllm_cache/tmp" \
