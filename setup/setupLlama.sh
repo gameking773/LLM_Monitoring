@@ -22,6 +22,13 @@ nvidia-smi | head -5
 # Pull llama.cpp from github if it isn't here. Else reuse it
 cd ${LLM_DIR}
 
+# Python monitoring env
+python -m venv ${LLM_DIR}/monitor_env
+source ${LLM_DIR}/monitor_env/bin/activate
+pip install fastapi uvicorn requests
+deactivate
+
+# Get llama.cpp repo
 if [ ! -d "llama.cpp" ]; then
     git clone https://github.com/ggml-org/llama.cpp
 fi

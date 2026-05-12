@@ -34,6 +34,12 @@ export TORCH_CUDA_ARCH_LIST="9.0"
 export NVCC_THREADS=1
 export MAX_JOBS=16
 
+# Python monitoring env
+python -m venv ${LLM_DIR}/monitor_env
+source ${LLM_DIR}/monitor_env/bin/activate
+pip install fastapi uvicorn requests
+deactivate
+
 # .venv creation and launching
 mkdir -p ${LLM_DIR}/vllm_env
 cd ${LLM_DIR}
@@ -45,6 +51,8 @@ source vllm_env/bin/activate
 pip install --upgrade pip
 pip install wheel setuptools
 pip install numpy
+pip install uvicorn fastapi
+
 
 # vLLM installation
 pip install vllm \
