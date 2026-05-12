@@ -1,7 +1,7 @@
 # lib import
 import os
 import time
-from getMetrics import getLLMMetrics, getMetricsGpu, getModel, getServerTime, getJobId
+from metrics/getMetrics import getLLMMetrics, getMetricsGpu, getModel, getServerTime, getJobId
 
 # constants
 node = os.getenv('SLURMD_NODENAME', 'localhost')

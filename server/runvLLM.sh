@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #SBATCH --account=${SBATCH_ACCOUNT}
 #SBATCH --job-name=${SBATCH_JOB_NAME}
-#SBATCH --output=${LLM_DIR}/logs/vLLM/run_venv-%j.out
+#SBATCH --output=${LLM_DIR}/logs/vLLM/runvLLM-%j.out
 #SBATCH --gres=gpu:1
 #SBATCH --cpus-per-task=8
 #SBATCH --mem=64G
@@ -31,7 +31,7 @@ export MULTIPROCESSING_TMPDIR="${LLM_DIR}/vllm_cache/tmp"
 
 
 # API Launch
-${LLM_DIR}/monitor_env/bin/python ${LLM_DIR}/metrics_api.py &
+${LLM_DIR}/monitor_env/bin/python ${LLM_DIR}/metrics/metricsAPI.py &
 
 # Server launch
 /usr/bin/env \
@@ -40,7 +40,7 @@ ${LLM_DIR}/monitor_env/bin/python ${LLM_DIR}/metrics_api.py &
     TRITON_CACHE_DIR="${LLM_DIR}/vllm_cache/triton" \
     VLLM_CONFIG_ROOT="${LLM_DIR}/vllm_cache/config" \
     PYTHONPATH=$PYTHONPATH \
-    python -m vllm.entrypoints.openai.api_server \
+    ${LLM_DIR}/vllm_env/bin/python -m vllm.entrypoints.openai.api_server \
         --model ${LLM_DIR}/models/${MODEL_FILE} \
         --served-model-name ${MODEL_FILE} \
         --host 0.0.0.0 \

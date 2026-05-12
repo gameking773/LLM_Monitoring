@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #SBATCH --account=${SBATCH_ACCOUNT}
 #SBATCH --job-name=${SBATCH_JOB_NAME}
-#SBATCH --output=${LLM_DIR}/setup_venv-%j.out
+#SBATCH --output=${LLM_DIR}/runLlamaCPP-%j.out
 #SBATCH --gres=gpu:1
 #SBATCH --cpus-per-task=8
 #SBATCH --mem=32G
@@ -17,7 +17,7 @@ export LD_LIBRARY_PATH=$(spack location -i cuda@13.0.2)/lib64:$LD_LIBRARY_PATH
 echo "Starting server on node : $HOSTNAME"
 
 # API Launch
-${LLM_DIR}/monitor_env/bin/python ${LLM_DIR}/metrics_api.py &
+${LLM_DIR}/monitor_env/bin/python ${LLM_DIR}/metrics/metricsAPI.py &
 
 # Run model
 ./llama.cpp/build/bin/llama-server \
