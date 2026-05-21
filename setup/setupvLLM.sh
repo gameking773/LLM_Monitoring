@@ -37,7 +37,7 @@ export MAX_JOBS=16
 # Python monitoring env
 python -m venv ${LLM_DIR}/monitor_env
 source ${LLM_DIR}/monitor_env/bin/activate
-pip install fastapi uvicorn requests 
+pip install fastapi uvicorn requests lighteval dotenv
 deactivate
 
 # .venv creation and launching

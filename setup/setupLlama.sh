@@ -25,7 +25,7 @@ cd ${LLM_DIR}
 # Python monitoring env
 python -m venv ${LLM_DIR}/monitor_env
 source ${LLM_DIR}/monitor_env/bin/activate
-pip install fastapi uvicorn requests
+pip install fastapi uvicorn requests lighteval dotenv
 deactivate
 
 # Get llama.cpp repo
