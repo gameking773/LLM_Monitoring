@@ -42,7 +42,7 @@ ${LLM_DIR}/monitor_env/bin/python ${LLM_DIR}/metrics/metricsAPI.py &
     PYTHONPATH=$PYTHONPATH \
     ${LLM_DIR}/vllm_env/bin/python -m vllm.entrypoints.openai.api_server \
         --model ${LLM_DIR}/models/${MODEL_FILE} \
-        --served-model-name ${MODEL_FILE} \
+        --served-model-name ${MODEL_NAME} \
         --host 0.0.0.0 \
         --port 8080 \
         --dtype float16 \
