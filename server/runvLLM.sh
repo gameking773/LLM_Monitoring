@@ -1,18 +1,4 @@
 #!/usr/bin/env bash
-#SBATCH --account=${SBATCH_ACCOUNT}
-#SBATCH --job-name=${SBATCH_JOB_NAME}
-#SBATCH --output=${LLM_DIR}/logs/vLLM/runvLLM-%j.out
-#SBATCH --gres=gpu:1
-#SBATCH --cpus-per-task=8
-#SBATCH --mem=64G
-#SBATCH --time=01:30:00
-#SBATCH --constraint=armgpu
-
-# Load environnement
-romeo_load_armgpu_env
-spack load python@3.13.0/rom
-spack load cuda@12.6.3
-
 # Activating vLLM env from its venv path 
 source ${LLM_DIR}/vllm_env/bin/activate
 

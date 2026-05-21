@@ -1,18 +1,4 @@
 #!/usr/bin/env bash
-#SBATCH --account=${SBATCH_ACCOUNT}
-#SBATCH --job-name=${SBATCH_JOB_NAME}
-#SBATCH --output=${LLM_DIR}/logs/vLLM/setup_venv-%j.out
-#SBATCH --gres=gpu:2
-#SBATCH --cpus-per-task=16
-#SBATCH --mem=128G
-#SBATCH --time=04:00:00
-#SBATCH --constraint=armgpu
-
-
-romeo_load_armgpu_env
-spack load python@3.12.5
-spack load cuda@12.6.2 
-
 # cache config
 mkdir -p "${LLM_DIR}/cache/tmp"
 mkdir -p "${LLM_DIR}/cache/pip_cache"
@@ -33,12 +19,6 @@ export TORCH_CUDA_ARCH_LIST="9.0"
 
 export NVCC_THREADS=1
 export MAX_JOBS=16
-
-# Python monitoring env
-python -m venv ${LLM_DIR}/monitor_env
-source ${LLM_DIR}/monitor_env/bin/activate
-pip install fastapi uvicorn requests lighteval dotenv
-deactivate
 
 # .venv creation and launching
 mkdir -p ${LLM_DIR}/vllm_env
