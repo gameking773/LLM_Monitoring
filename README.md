@@ -6,21 +6,22 @@
   - [1. Installation and .env](#1-installation-and-env)
   - [2. Models](#2-models)
   - [3. Setup & Server](#3-setup--server)
-    - [Llama.cpp](#llamacpp)
-    - [vLLM](#vllm)
+    - [Setup](#setup)
+    - [Server](#server)
   - [4. Monitor your LLM](#4-monitor-your-llm)
 - [What does the dashboard track ?](#what-does-the-dashboard-track-)
   - [1. Sources](#1-sources)
   - [2. GPU Data](#2-gpu-datas)
   - [3. Llama.cpp Data](#3-llamacpp-datas)
   - [4. vLLM Data](#4-vllm-datas)
+- [Benchmarking](#benchmarking)
 - [API](#api)
 - [Credits](#credits)
 
 
 ## Context and requirements
 
-This project is designed for researchers, students, and engineers working on LLMs who want an automated way to deploy inference servers on High-Performance Computing clusters without dealing with complex manual configurations.
+This project is designed for researchers, students, and engineers working on LLMs who want an automated way to deploy inference servers and benchmark models on High-Performance Computing clusters without dealing with complex manual configurations.
 
 ### Requirements
 
@@ -63,23 +64,23 @@ Enter the infos for your model in the .env file. Then run this command :
 
 ### 3. Setup & Server
 
-#### Llama.cpp
+#### Setup
 
-##### Setup
+Run the setup script. This will compile the engine for ARM/GPU (GH200) and additional tools.
 
-Run the setup script. This will compile the engine for ARM/GPU (GH200) and download your model.
-
-    ./run.sh sbatch setup/setupLlama.sh
+    ./run.sh sbatch setup.sh [inference_engine]
 
 *Note : Compilation can take a long time and the job will automatically stops after 1h30, don't hesitate to increase it.*
 
-##### Server
+#### Server
 
-To start the Llama server:
+To start the server:
 
-    ./run.sh sbatch server/runLlamaServer.sh
+    ./run.sh sbatch runServer.sh [inference_engine]
 
-The server will start on the allocated node. To access the web interface :
+The server will start on the allocated node. 
+
+To access the Llama web interface :
 
 - Identify the node name where the job is running with squeue --me
 
@@ -87,26 +88,7 @@ The server will start on the allocated node. To access the web interface :
 
 - Open http://localhost:8080 in your browser.
 
-#### vLLM
-
-##### Setup 
-
-Run the setup script. This will compile the engine for ARM/GPU and download your model.
-
-    ./run.sh sbatch setup/setupvLLM.sh
-
-*Note : Compilation can take a really really long time and the job will automatically stops after 4h00, if you hit a time limit, try to optimize my code.*
-
-
-##### Server 
-
-You need to put your venv path in the .env file in order to start vLLM.
-
-To start the Llama server:
-
-    ./run.sh sbatch server/runvLLM.sh
-
-On vLLM, there isn't any chat box, i advise you to use Opencode 
+*On vLLM, there isn't any chat box, i advise you to use Opencode*
 
 
 ### 4. Monitor your LLM
@@ -188,6 +170,31 @@ In order to use it, you need to connect in ssh to the 5000 port of the running n
 
 Then, you can access the endpoint on http://localhost:5000
 
+## Benchmarking 
+
+To simplify the benchmarking, I choose to use EleutherAI lm-evaluation-harness framework. It works by executing the dataset on the model via an OpenAI-compatible API which make it perfect to test on Llama.cpp and vLLM.  
+For the moment, the loglikelihood isn't supported on OpenAi chat completion endpoint (which are used in this project). It should be implemented soon but for now, choose datasets whithout them.
+To use the benchmark, you need to find a dataset supported by lm-eval and put it in the .env. 
+Then execute this command to start the banchmarking :
+
+    ./run.sh sbatch runBenchmark.sh
+
+*Benchmarking a model can take several hours. The benchmarking script stops after 18h, feel free to increase this value if you need more*
+
 ## Credits
 
 This work was performed with the assistance of the ROMEO Regional Computing Center
+
+
+EleutherAI eval-harness :   
+
+    @misc{eval-harness,
+    author       = {Gao, Leo and Tow, Jonathan and Abbasi, Baber and Biderman, Stella and Black, Sid and DiPofi, Anthony and Foster, Charles and Golding, Laurence and Hsu, Jeffrey and Le Noac'h, Alain and Li, Haonan and McDonell, Kyle and Muennighoff, Niklas and Ociepa, Chris and Phang, Jason and Reynolds, Laria and Schoelkopf, Hailey and Skowron, Aviya and Sutawika, Lintang and Tang, Eric and Thite, Anish and Wang, Ben and Wang, Kevin and Zou, Andy},
+    title        = {The Language Model Evaluation Harness},
+    month        = 07,
+    year         = 2024,
+    publisher    = {Zenodo},
+    version      = {v0.4.3},
+    doi          = {10.5281/zenodo.12608602},
+    url          = {https://zenodo.org/records/12608602}
+    }
