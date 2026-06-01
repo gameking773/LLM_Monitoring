@@ -11,6 +11,7 @@
 # Load environnement
 romeo_load_armgpu_env
 
+# Check if there's an engine selected
 if [ $# -lt 1 ]; then 
     echo "You must choose an inference engine between vllm and llamacpp"
     exit 1
@@ -18,6 +19,7 @@ fi
 
 export ENGINE=$1
 
+# Start the right engine
 if [ "$ENGINE" == "llamacpp" ]; then
     spack load cuda@13.0.2
     source "${LLM_DIR}/server/runLlama.sh"

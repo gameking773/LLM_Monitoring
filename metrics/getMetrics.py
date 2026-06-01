@@ -23,7 +23,7 @@ gpuParams = [
     "ecc.errors.uncorrected.aggregate.total"
     ]
 
-
+# Function which get the job id by comparing time since launch with slurm time
 def getJobId():
     try:
         result = subprocess.check_output(
@@ -35,6 +35,7 @@ def getJobId():
         print(f"Job ID recuperation failed : {e}")
         return None
 
+# Function which get the name of the model
 def getModel(jobId):
     command = ["srun", "--jobid", str(jobId), "--overlap", "curl", "-s", "-H", "Content-Type: application/json", "http://localhost:8080/v1/models"]
     try:
@@ -44,6 +45,7 @@ def getModel(jobId):
     except:
         return "Unknown Model"
 
+# Function which get the program start time and the server launchtime
 def getServerTime(jobId):
     # PID Recuperation
     commandPid = ["srun", "--jobid", str(jobId), "--overlap", "pgrep", "-f", "-o", "server|vllm|python"]
@@ -65,6 +67,7 @@ def getServerTime(jobId):
 
     return launchTime, readyTime
 
+# Function which get GPU metrics from the nvidia-smi command
 def getMetricsGpu(jobId):
     query = ",".join(gpuParams)
     command = [
@@ -88,7 +91,7 @@ def getMetricsGpu(jobId):
         print(f"Error : {e}")
         return None
 
-
+# Function which get the LLM metrics from it's API endpoint
 def getLLMMetrics(jobId):
     command = [
         "srun", "--jobid", str(jobId), "--overlap", 
